@@ -1,0 +1,56 @@
+﻿@model IEnumerable<DataAccessLayer.Models.Product>
+
+@{
+    ViewBag.Title = "DisplayProduct";
+    Layout = "~/Views/Shared/" + Session["addtoLayout"].ToString();
+}
+
+<h2>DisplayProduct</h2>
+
+<p>
+    @Html.ActionLink("Add new Product", "Products")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Product name
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Price
+        </th>
+
+        <th>
+            description
+        </th>
+    
+        <th>Actions</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+     
+        <td>
+            @Html.ActionLink("Add daily sold Product quantity", "addSaleData", new { id = item.id, curntQ = item.Quantity }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.id })
+
+        </td>
+    </tr>
+}
+
+</table>

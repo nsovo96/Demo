@@ -1,0 +1,37 @@
+﻿@model  DataAccessLayer.Models.Notifications
+
+@{
+    ViewBag.Title = "ViewNotification";
+    Layout = "~/Views/Shared/" + Session["addtoLayout"].ToString();
+}
+
+
+<section class="header14 cid-scIjd3Dgd5 mbr-fullscreen" id="header14-u">
+
+
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-md-4 image-wrapper">
+                <img src="~/assets/images/refill-300x303.png" alt="Mobirise">
+            </div>
+            <div class="col-12 col-md">
+                <div class="text-wrapper">
+                    <h1 class="mbr-section-title mbr-fonts-style mb-3 display-7">
+                        <strong>
+                            @Html.DisplayFor(model => model.datesent)
+                        
+                            &nbsp;
+                        </strong><br><strong><br></strong>
+                    </h1>
+                    <p class="mbr-text mbr-fonts-style display-7">
+                        @Html.DisplayFor(model => model.Notification)
+                    </p>
+                    <div class="mbr-section-btn mt-3">
+                        <a class="btn btn-secondary display-4" href="/Home/HomeIndex">close</a>
+                        <a class="btn btn-info display-4" href="@Url.Action("NewTask","Tasks")">start task</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

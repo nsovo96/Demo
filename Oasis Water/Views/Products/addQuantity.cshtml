@@ -1,0 +1,56 @@
+﻿@model DataAccessLayer.Models.Product
+
+@{
+    ViewBag.Title = "addSaleData";
+    Layout = "~/Views/Shared/" + Session["addtoLayout"].ToString();
+}
+<section class="features8 cid-scNHxnp5BV" xmlns="http://www.w3.org/1999/html" id="features9-1v">
+
+
+
+    <form action="addSaleData" method="POST" class="mbr-form form-with-styler">
+
+
+
+        <div class="container">
+            <div class="card">
+                <div class="card-wrapper">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-4">
+                            <div class="image-wrapper">
+                                <img src="~/" @Model.Image alt="no image">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md">
+                            <div class="card-box">
+                                <div class="row">
+                                    <div class="col-md">
+                                        <h6 class="card-title mbr-fonts-style display-5">
+                                            <strong>@Model.ProductName</strong>
+                                        </h6>
+                                        <p class="mbr-text mbr-fonts-style display-7">
+                                            @Model.Description   R @Model.CurrentPrice
+                                        </p>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button type="submit" class="btn btn-primary display-4">Add  sold quantity       </button></div>
+
+                                    </div>
+                                    <div class="col-md-auto">
+                                        <p class="price mbr-fonts-style display-2">Available Products @Model.Quantity</p>
+                                        <div class="col-md col-sm-12 form-group" data-for="email">
+                                            <input type="number" name="Quantity" placeholder="how many products sold" class="form-control">
+                                        </div>
+                                        <div class="mbr-section-btn">
+                                        </div>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+</section>

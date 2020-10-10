@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "ManagementCheckList";
+    Layout = "~/Views/Shared/" + Session["addtoLayout"].ToString();
+}
+
+
+        <section class="form5 cid-scK839D4Fn" id="form5-1p">
+
+
+            <div class="container">
+                <div class="mbr-section-head">
+                    <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+                        <strong>Check list data</strong>
+                    </h3>
+
+                </div>
+                <div class="row justify-content-center mt-4">
+                    <div class="col-lg-8 mx-auto mbr-form">
+                        <form action="ManagementCheckListB" method="POST" class="mbr-form form-with-styler">
+                            <div class="">
+
+                                <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
+                                    Oops...! some
+                                    problem!
+                                </div>
+                            </div>                     
+                            <br />
+                           
+                            <div class="dragArea row">
+                                <div class="col-md col-sm-12 form-group" data-for="name">
+                                    <input type="number" name="TDs_clean" placeholder="TDs clean value" data-form-field="TDs_clean" class="form-control">
+                                </div>
+                                <div class="col-md col-sm-12 form-group" data-for="email">
+                                    <input type="number" name="TDs_Main" placeholder="TDs Main value" class="form-control">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="dragArea row">
+                                <div class="col-md col-sm-12 form-group" data-for="name">
+                                    <input type="number" name="_1_PF_10_Micron" placeholder="1 PF 10 Micron value" class="form-control">
+                                </div>
+                                <div class="col-md col-sm-12 form-group" data-for="email">
+                                    <input type="number" name="_2_PF_5_Micron" placeholder=" 2 PF 5 Micron value" class="form-control">
+                                </div>
+
+
+                            </div>
+                            <br />
+                            <div class="dragArea row">
+                                <div class="col-md col-sm-12 form-group" data-for="name">
+                                    <input type="number" name="_3_Sand_Filter" placeholder=" 3 Sand Filter" class="form-control">
+                                </div>
+                                <div class="col-md col-sm-12 form-group" data-for="email">
+                                    <input type="number" name="_4_Softner" placeholder=" 4 softner value" class="form-control">
+                                </div>
+
+
+                            </div>
+                            <br />
+                            <div class="dragArea row">
+                                <div class="col-md col-sm-12 form-group" data-for="name">
+                                    <input type="number" name="_5_1_Micron_Preasure" placeholder="5 1 Micron Preasure value" class="form-control">
+                                </div>
+                                <div class="col-md col-sm-12 form-group" data-for="email">
+                                    <input type="number" name="_6_Membrane_Preasure" placeholder="6 Membrane Preasure value" class="form-control">
+                                </div>
+
+
+                            </div>
+                            <br />
+                            <div class="dragArea row">
+                                <div class="col-md col-sm-12 form-group" data-for="name">
+                                    <input type="number" name="_7_Flow_Rate_RAW" placeholder="Flow Rate RAW value" class="form-control">
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button type="submit" class="btn btn-primary display-4">Log data</button></div>
+
+                            </div>
+                            <hr />
+                        </form>
+                </div>
+                </div>
+            </div>
+        </section>

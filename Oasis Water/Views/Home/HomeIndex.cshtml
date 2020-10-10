@@ -1,0 +1,153 @@
+﻿@model IEnumerable<DataAccessLayer.Models.Notifications>
+
+@{
+    ViewBag.Title = "HomeIndex";
+    Layout = "~/Views/Shared/" + Session["addtoLayout"].ToString();
+}
+
+
+
+@{
+
+                if (Session["UserRole"].ToString() == "ProccessMaintananceEmployee")
+                {
+
+        <section class="features9 cid-scI5TakMZp" id="features10-r">
+            <!---->
+
+
+            <div class="container">
+                <div class="mbr-section-head">
+                    <h3 class="mbr-section-title mbr-fonts-style mb-0 display-2"><strong>Notification center</strong></h3>
+
+                </div>
+                
+
+
+            @foreach (var item in Model)
+            {
+
+
+
+
+                    <div class="row mt-4">
+                        <div class="card col-12">
+                            <div class="card-wrapper">
+                                <div class="top-line row">
+                                    <div class="col">
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="price mbr-fonts-style display-5">
+                                            @Html.DisplayFor(modelItem => item.datesent)
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="bottom-line">
+                                    <p class="mbr-text mbr-fonts-style display-7">
+                                        @Html.DisplayFor(modelItem => item.Notification)
+                                        <br />
+                                        @Html.ActionLink("Details", "ViewNotification", new { id = item.id }) 
+                                    </p>
+                                   
+                                   
+                                </div>
+                                
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+                }
+
+
+
+
+
+
+
+
+
+            </div>
+        </section>
+
+    }
+    else
+    {
+
+
+<section class="features9 cid-scI5TakMZp" id="features10-r">
+    <!---->
+
+
+    <div class="container">
+        <div class="mbr-section-head">
+            <h3 class="mbr-section-title mbr-fonts-style mb-0 display-2"><strong>Notification center</strong></h3>
+
+        </div>
+
+        @foreach (var item in Model)
+        {
+
+
+
+            <div class="row mt-4">
+                <div class="card col-12">
+                    <div class="card-wrapper">
+                        <div class="top-line row">
+                            <div class="col">
+                            </div>
+                            <div class="col-auto">
+                                <p class="price mbr-fonts-style display-5">
+                                    @Html.DisplayFor(modelItem => item.datesent)
+                                </p>
+                            </div>
+                        </div>
+                        <div class="bottom-line">
+                            <p class="mbr-text mbr-fonts-style display-7">
+                                @Html.DisplayFor(modelItem => item.Notification)
+                                <br />
+
+                                @Html.ActionLink("Details", "ViewNotification", new { id = item.id }) 
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+    </div>
+</section>
+
+
+
+
+    }
+
+
+    }
+
+       

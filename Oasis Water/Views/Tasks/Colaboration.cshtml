@@ -1,0 +1,147 @@
+﻿@model IEnumerable<DataAccessLayer.Models.Comments>
+
+@{
+    ViewBag.Title = "Colaboration";
+    Layout = "~/Views/Shared/" + Session["addtoLayout"].ToString();
+}
+
+
+@using DataAccessLayer.Models;
+@using BusinessLogic;
+
+
+
+@{
+    List<DataAccessLayer.Models.Users> user = (List<DataAccessLayer.Models.Users>)Session["userdetails"];
+
+    //get tasks
+    Task Tasks = new Task("Select");
+
+    List<Tasks> AllTasks = new List<Tasks>();
+
+    AllTasks = Tasks.GetTasks();
+
+
+
+    //get users
+
+    List<Users> userManager = new List<Users>();
+
+
+    UserAccounts AccountList = new UserAccounts("Select");
+
+    userManager = AccountList.Login();
+}
+
+
+@{
+    string Control = "False";
+
+    foreach (var t in AllTasks)
+    {
+
+        foreach (var u in userManager)
+        {
+
+
+
+            int taskId = Convert.ToInt32(Session["taskID"]);
+
+
+
+
+            if ((Control == "False") && (taskId == t.id))
+            {
+                Control = "True";
+                Session["taskDetail"] = t.Taskdetail;
+                <section class="form1 cid-scJPWXXjak" id="form1-1h">
+
+                    <div class="mbr-overlay" style="opacity: 0.9; background-color: rgb(255, 255, 255);"></div>
+                    <div class="align-center container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8 mx-auto mbr-form">
+                                <form action="MyColaboration" method="post" class="mbr-form form-with-styler">
+                                    <div class="">
+
+                                        <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
+                                            Oops...! some
+                                            problem!
+                                        </div>
+                                    </div>
+                                    <div class="dragArea row">
+                                        <div class="col-12">
+                                            <h1 class="mbr-section-title mb-4 display-2">@u.FullNames</h1>
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="mbr-text mbr-fonts-style mb-5 display-7"><em>@t.Taskdetail</em></p>
+                                        </div>
+
+                                        <div class="col-md col-12 form-group" data-for="name">
+                                            <input type="text" name="Comment" id="Comment" placeholder="comment" data-form-field="Name" class="form-control" id="name-form1-1h">
+                                        </div>
+                                      
+                                        <div class="mbr-section-btn col-12 col-md-auto"><button type="submit" class="btn btn-primary display-4"><span class="mobi-mbri mobi-mbri-chat mbr-iconfont mbr-iconfont-btn"></span>send comment</button></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+
+
+
+            }
+
+            foreach (var item in Model)
+            {
+
+                if ((item.Fk_commentor_ID == u.id) && (item.Fk_task_ID == t.id))
+                {
+                                      <section class="testimonials2 cid-scJQyWtarZ" id="testimonials2-1i">
+
+
+                        <div class="container">
+                            <h3 class="mbr-section-title mbr-fonts-style align-center mb-4 display-2"><strong></strong></h3>
+                            <div class="row justify-content-center">
+                                <div class="card col-12 col-md-6">
+                                    <p class="mbr-text mbr-fonts-style mb-4 display-7">@item.comments</p>
+                                    <div class="d-flex mb-md-0 mb-4">
+
+                                        <div class="text-wrapper">
+                                            <p class="name mbr-fonts-style mb-1 display-4">
+                                                <strong>@u.FullNames</strong>
+                                            </p>
+                                            <p class="position mbr-fonts-style display-4">
+                                                <strong>@u.UserRole</strong>
+
+                                            </p>
+                                            <p>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @item.DateCommented
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </section>
+                }
+            }
+
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+

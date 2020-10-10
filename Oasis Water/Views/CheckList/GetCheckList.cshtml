@@ -1,0 +1,959 @@
+﻿@model IEnumerable<DataAccessLayer.Models.ManagementCheckList>
+
+@{
+    ViewBag.Title = "GetCheckList";
+    Layout = "~/Views/Shared/" + Session["addtoLayout"].ToString();
+}
+
+
+
+<hr />
+<br />
+<br />
+
+@{
+    int counter1 = 1;
+
+    if (Session["UserRole"].ToString() == "Manager")
+    {
+        <div class="mbr-section-btn mt-3">
+            <a class="btn btn-secondary display-4" href="~/CheckList/ManagementCheckList">Fill in the Checklist</a>
+        </div>
+        <h4>Ozone effect</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+
+                <thead>
+
+                    <tr>
+                        <th>
+
+                            list no.
+                        </th>
+                        <th class="cell">
+
+                            Date
+                        </th>
+
+                        <th class="cell">
+
+                            Sand filter
+                        </th>
+                        <th class="cell">
+
+                            Softner
+                        </th>
+                        <th class="cell">
+
+                            PF 10 Micron
+                        </th>
+                        <th class="cell">
+
+                            PF 5 Micron
+
+                        </th>
+                        <th>
+                            Mun tank level
+                        </th>
+                        <th>
+                            Ozone
+                        </th>
+                    </tr>
+                </thead>
+
+                @{
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @counter1
+                            </td>
+
+                            <td class="cell">
+                                @item.date
+                            </td>
+
+                            <td class="cell">
+                                @item._4_Softner psi
+                            </td>
+                            <td class="cell">
+                                @item._3_Sand_Filter psi
+                            </td>
+                            <td class="cell">
+                                @item._1_PF_10_Micron psi
+                            </td>
+                            <td class="cell">
+                                @item._2_PF_5_Micron psi
+                            </td>
+                            <td class="cell">
+                                @item.Mun_Tank_level %
+                            </td>
+                            <td class="cell">
+                                @item.Ozone
+
+                            </td>
+                        </tr>
+
+                        counter1 += 1;
+                    }
+
+                }
+            </table>
+        </div>
+
+    }
+    else if (Session["UserRole"].ToString() == "ProccessMaintananceEmployee")
+    {
+        <div class="mbr-section-btn mt-3">
+            <a class="btn btn-secondary display-4" href="~/Tasks/NewTask">Back</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+
+                <thead>
+
+                    <tr>
+                        <th class="cell">
+
+                            list no.
+                        </th>
+                        <th class="cell">
+
+                            Date
+                        </th>
+
+
+                        <th class="cell">
+
+                            Sand filter
+                        </th>
+                        <th class="cell">
+
+                            Softner
+                        </th>
+                        <th class="cell">
+
+                            PF 10 Micron
+                        </th>
+                        <th class="cell">
+
+                            PF 5 Micron
+
+                        </th>
+                        <th class="cell">
+
+                            Mun tank level
+                        </th>
+                        <th class="cell">
+
+                            Ozone
+                        </th>
+                    </tr>
+                </thead>
+
+                @{
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="cell">
+                                @counter1
+                            </td>
+
+                            <td class="cell">
+                                @item.date
+                            </td>
+
+                            <td class="cell">
+                                @item._4_Softner psi
+                            </td>
+                            <td class="cell">
+                                @item._3_Sand_Filter psi
+                            </td>
+                            <td class="cell">
+                                @item._1_PF_10_Micron psi
+                            </td>
+                            <td class="cell">
+                                @item._2_PF_5_Micron psi
+                            </td>
+                            <td class="cell">
+                                @item.Mun_Tank_level %
+                            <td class="cell">
+                                @item.Ozone
+                            </td>
+                            </td>
+                        </tr>
+
+                        counter1 += 1;
+
+                    }
+
+                }
+            </table>
+        </div>
+
+    }
+
+}
+
+
+
+
+
+
+
+
+<hr />
+<br />
+<br />
+<h4>Crystal color effect</h4>
+
+@{
+    int counter2 = 1;
+
+    if (Session["UserRole"].ToString() == "Manager")
+    {
+
+
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+
+                <thead>
+
+                    <tr>
+                        <th class="cell">
+
+                            list no.
+                        </th>
+                        <th class="cell">
+
+                            Date
+                        </th>
+
+                        <th class="cell">
+
+                            Microne presure
+
+                        </th>
+                        <th class="cell">
+
+                            Membrane Presure
+                        </th>
+                        <th class="cell">
+
+                            Clean tank level
+
+                        </th>
+                        <th class="cell">
+
+                            Silcone Crystal color
+
+                        </th>
+
+                    </tr>
+                </thead>
+
+                @{
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="cell">
+                                @counter2
+                            </td>
+
+                            <td class="cell">
+                                @item.date
+                            </td>
+
+                            <td class="cell">
+                                @item._5_1_Micron_Preasure psi
+                            </td>
+                            <td class="cell">
+                                @item._6_Membrane_Preasure psi
+                            </td>
+                            <td class="cell">
+                                @item.Clean_tank_level %
+                            </td>
+                            <td class="cell">
+                                @item.Silcone_Crystal_Color
+                            </td>
+
+                        </tr>
+
+                        counter2 += 1;
+                    }
+
+                }
+            </table>
+        </div>
+
+    }
+    else if (Session["UserRole"].ToString() == "ProccessMaintananceEmployee")
+    {
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                <thead>
+
+                    <tr>
+                        <th class="cell">
+
+                            list no.
+                        </th>
+                        <th class="cell">
+
+                            Date
+                        </th>
+
+                        <th class="cell">
+
+                            Microne presure
+
+                        </th>
+                        <th class="cell">
+
+                            Membrane Presure
+                        </th>
+                        <th class="cell">
+
+                            Clean tank level
+
+                        </th>
+                        <th class="cell">
+
+                            Silcone Crystal color
+
+                        </th>
+
+                    </tr>
+                </thead>
+
+                @{
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="cell">
+                                @counter2
+                            </td>
+
+                            <td class="cell">
+                                @item.date
+                            </td>
+                            <td class="cell">
+                                @item.Silcone_Crystal_Color
+                            </td>
+                            <td class="cell">
+                                @item._5_1_Micron_Preasure psi
+                            </td>
+                            <td class="cell">
+                                @item._6_Membrane_Preasure psi
+                            </td>
+                            <td class="cell">
+                                @item.Clean_tank_level %
+                            </td>
+                            <td class="cell">
+                                @item.Silcone_Crystal_Color
+                            </td>
+
+                        </tr>
+                        counter2 += 1;
+
+                    }
+
+                }
+            </table>
+        </div>
+
+    }
+
+}
+<hr />
+<br />
+<br />
+<h4>Pump effect</h4>
+
+@{
+    int counter6 = 1;
+
+    if (Session["UserRole"].ToString() == "Manager")
+    {
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+
+                <thead>
+
+                    <tr>
+                        <th>
+
+                            list no.
+                        </th>
+                        <th class="cell">
+
+                            Date
+                        </th>
+                        <th class="cell">
+
+                            ozone
+                        </th>
+                        <th class="cell">
+                            silcone crystal color
+                        </th>
+                        <th class="cell">
+
+                            Pump Functionality
+                        </th>
+
+                    </tr>
+                </thead>
+
+                @{
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="cell">
+                                @counter6
+                            </td>
+
+                            <td class="cell">
+                                @item.date
+                            </td>
+                            <td>
+                                @item.Ozone
+                            </td>
+                            <td>
+                                @item.Silcone_Crystal_Color
+                            </td>
+                            <td class="cell">
+                                @item._9_Pump_Functional
+                            </td>
+
+                        </tr>
+
+                        counter6 += 1;
+
+                    }
+
+                }
+            </table>
+        </div>
+
+
+
+
+    }
+    else if (Session["UserRole"].ToString() == "ProccessMaintananceEmployee")
+    {
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+
+                <thead>
+
+                    <tr>
+                        <th>
+
+                            list no.
+                        </th>
+                        <th class="cell">
+
+                            Date
+                        </th>
+                        <th class="cell">
+
+                            ozone
+                        </th>
+                        <th class="cell">
+                            silcone crystal color
+                        </th>
+                        <th class="cell">
+
+                            Pump Functionality
+                        </th>
+
+                    </tr>
+                </thead>
+
+                @{
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="cell">
+                                @counter6
+                            </td>
+
+                            <td class="cell">
+                                @item.date
+                            </td>
+                            <td>
+                                @item.Ozone
+                            </td>
+                            <td>
+                                @item.Silcone_Crystal_Color
+                            </td>
+                            <td class="cell">
+                                @item._9_Pump_Functional
+                            </td>
+
+                        </tr>
+
+                        counter6 += 1;
+
+                    }
+
+                }
+            </table>
+        </div>
+
+    }
+}
+
+<hr />
+<br />
+<br />
+<h4>Pump rate</h4>
+
+@{
+    int counter = 1;
+
+    if (Session["UserRole"].ToString() == "Manager")
+    {
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+
+                <thead>
+
+                    <tr>
+                        <th>
+
+                            list no.
+                        </th>
+                        <th class="cell">
+
+                            Date
+                        </th>
+                        <th class="cell">
+
+                            flow rate raw
+                        </th>
+                        <th class="cell">
+
+                            flow rate clean
+                        </th>
+                        <th class="cell">
+
+                            Pump Functionality
+                        </th>
+
+                    </tr>
+                </thead>
+
+                @{
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @counter
+                            </td>
+
+                            <td class="cell">
+                                @item.date
+                            </td>
+                            <td>
+                                @item._7_Flow_Rate_RAW liters
+                            </td>
+                            <td>
+                                @item._8_Flow_Rate_Clean liters
+                            </td>
+                            <td class="cell">
+                                @item._9_Pump_Functional
+                            </td>
+
+                        </tr>
+
+                        counter += 1;
+
+                    }
+
+                }
+            </table>
+        </div>
+
+
+
+
+    }
+    else if (Session["UserRole"].ToString() == "ProccessMaintananceEmployee")
+    {
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+
+                <thead>
+
+                    <tr>
+                        <th>
+
+                            list no.
+                        </th>
+                        <th class="cell">
+
+                            Date
+                        </th>
+                        <th class="cell">
+
+                            Flow rate raw
+                        </th>
+                        <th class="cell">
+                            flow rate clean
+                        </th>
+                        <th class="cell">
+
+                            Pump Functionality
+                        </th>
+
+                    </tr>
+                </thead>
+
+                @{
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="cell">
+                                @counter
+                            </td>
+
+                            <td class="cell">
+                                @item.date
+                            </td>
+                            <td>
+                                @item._7_Flow_Rate_RAW liters
+                            </td>
+                            <td>
+                                @item._8_Flow_Rate_Clean liters
+                            </td>
+                            <td class="cell">
+                                @item._9_Pump_Functional
+                            </td>
+
+                        </tr>
+
+                        counter += 1;
+
+                    }
+
+                }
+            </table>
+        </div>
+
+    }
+}
+
+<hr />
+<br />
+<br />
+<h4>Conductive effect</h4>
+
+@{
+    int counter3 = 1;
+
+    if (Session["UserRole"].ToString() == "Manager")
+    {
+
+
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+
+                <thead>
+
+                    <tr>
+                        <th class="cell">
+
+                            list no.
+                        </th>
+                        <th class="cell">
+
+                            Date
+                        </th>
+                        <th class="cell">
+
+                            TDs Clean value
+
+                        </th>
+                        <th class="cell">
+
+                            TDs Main raw
+
+                        </th>
+                        <th class="cell">
+
+                            Conductive
+                        </th>
+
+                    </tr>
+                </thead>
+
+                @{
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="cell">
+                                @counter3
+                            </td>
+
+                            <td class="cell">
+                                @item.date
+                            </td>
+                            <td class="cell">
+                                @item.TDs_clean
+                            </td>
+                            <td class="cell">
+                                @item.TDs_Main
+                            </td>
+                            <td class="cell">
+                                @item.Conductive
+                            </td>
+
+                        </tr>
+
+                        counter3 += 1;
+                    }
+
+                }
+            </table>
+        </div>
+    }
+    else if (Session["UserRole"].ToString() == "ProccessMaintananceEmployee")
+    {
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+
+                <thead>
+
+                    <tr>
+                        <th class="cell">
+
+                            list no.
+                        </th>
+                        <th class="cell">
+
+                            Date
+                        </th>
+                        <th class="cell">
+
+                            TDs Clean value
+
+                        </th>
+                        <th class="cell">
+
+                            TDs Main raw
+
+                        </th>
+                        <th class="cell">
+
+                            Conductive
+                        </th>
+
+                    </tr>
+                </thead>
+
+                @{
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="cell">
+                                @counter3
+                            </td>
+
+                            <td class="cell">
+                                @item.date
+                            </td>
+                            <td class="cell">
+                                @item.TDs_clean
+                            </td>
+                            <td class="cell">
+                                @item.TDs_Main
+                            </td>
+                            <td class="cell">
+                                @item.Conductive
+                            </td>
+
+                        </tr>
+                        counter3 += 1;
+
+                    }
+
+                }
+            </table>
+        </div>
+
+
+    }
+
+}
+
+<hr />
+<br />
+<br />
+<h4>Results</h4>
+
+@{
+    int counter4 = 1;
+
+    if (Session["UserRole"].ToString() == "Manager")
+    {
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+
+                <thead>
+
+                    <tr>
+                        <th>
+
+                            list no.
+                        </th>
+                        <th class="cell">
+
+                            Date
+                        </th>
+
+                        <th class="cell">
+
+                            Pump Functionality
+                        </th>
+                        <th class="cell">
+
+                            Clean water meter level
+                        </th>
+                        <th class="cell">
+
+                            Clean water to be Purified
+                        </th>
+                    </tr>
+                </thead>
+
+                @{
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @counter4
+                            </td>
+
+                            <td class="cell">
+                                @item.date
+                            </td>
+
+                            <td class="cell">
+                                @item._9_Pump_Functional
+                            </td>
+                            <td class="cell">
+                                @item.Clean_Water_Meter_Reading m^3
+                            </td>
+                            <td class="cell">
+                                @item.Litres_Purified_Since_Previous_Reading liters
+                            </td>
+                        </tr>
+
+                        counter4 += 1;
+
+                    }
+
+                }
+            </table>
+        </div>
+
+
+
+
+    }
+    else if (Session["UserRole"].ToString() == "ProccessMaintananceEmployee")
+    {
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+
+                <thead>
+
+                    <tr>
+                        <th>
+
+                            list no.
+                        </th>
+                        <th class="cell">
+
+                            Date
+                        </th>
+
+                        <th class="cell">
+
+                            Pump Functionality
+                        </th>
+                        <th class="cell">
+
+                            Clean water meter level
+                        </th>
+                        <th class="cell">
+
+                            Clean water to be Purified
+                        </th>
+                    </tr>
+                </thead>
+
+                @{
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="cell">
+                                @counter4
+                            </td>
+
+                            <td class="cell">
+                                @item.date
+                            </td>
+
+                            <td class="cell">
+                                @item._9_Pump_Functional
+                            </td>
+                            <td class="cell">
+                                @item.Clean_Water_Meter_Reading m^3
+                            </td>
+                            <td class="cell">
+                                @item.Litres_Purified_Since_Previous_Reading liters
+                            </td>
+                        </tr>
+
+                        counter4 += 1;
+
+                    }
+
+                }
+            </table>
+        </div>
+
+    }
+}
+
