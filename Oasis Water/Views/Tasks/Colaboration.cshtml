@@ -15,7 +15,7 @@
     List<DataAccessLayer.Models.Users> user = (List<DataAccessLayer.Models.Users>)Session["userdetails"];
 
     //get tasks
-    Task Tasks = new Task("Select");
+    oasisTask Tasks = new oasisTask("Select");
 
     List<Tasks> AllTasks = new List<Tasks>();
 
@@ -77,7 +77,8 @@
                                         </div>
 
                                         <div class="col-md col-12 form-group" data-for="name">
-                                            <input type="text" name="Comment" id="Comment" placeholder="comment" data-form-field="Name" class="form-control" id="name-form1-1h">
+                                            <input type="hidden" name="idtask" value="@taskId"/>
+                                            <input type="text" name="Comment" id="Comment" placeholder="comment" data-form-field="Name" class="form-control" >
                                         </div>
                                       
                                         <div class="mbr-section-btn col-12 col-md-auto"><button type="submit" class="btn btn-primary display-4"><span class="mobi-mbri mobi-mbri-chat mbr-iconfont mbr-iconfont-btn"></span>send comment</button></div>

@@ -6,7 +6,7 @@
 }
 
 
-
+<link href="~/css/Mymain.css" rel="stylesheet" />
 <hr />
 <br />
 <br />
@@ -16,17 +16,18 @@
 
     if (Session["UserRole"].ToString() == "Manager")
     {
-        <div class="mbr-section-btn mt-3">
-            <a class="btn btn-secondary display-4" href="~/CheckList/ManagementCheckList">Fill in the Checklist</a>
-        </div>
+
+
         <h4>Ozone effect</h4>
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+        <div class="Checklistcontainer">
+
+            <table class="checklistTable">
 
 
                 <thead>
 
-                    <tr>
+                    <tr class="Checklisrow">
                         <th>
 
                             list no.
@@ -109,12 +110,12 @@
             <a class="btn btn-secondary display-4" href="~/Tasks/NewTask">Back</a>
         </div>
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="checklistTable">
 
 
                 <thead>
 
-                    <tr>
+                    <tr class="Checklisrow">
                         <th class="cell">
 
                             list no.
@@ -182,7 +183,7 @@
                             <td class="cell">
                                 @item.Ozone
                             </td>
-                            </td>
+                          
                         </tr>
 
                         counter1 += 1;
@@ -219,12 +220,12 @@
 
 
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="checklistTable">
 
 
                 <thead>
 
-                    <tr>
+                    <tr class="Checklisrow">
                         <th class="cell">
 
                             list no.
@@ -297,11 +298,14 @@
 
 
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="checklistTable">
+
 
                 <thead>
 
-                    <tr>
+                    <tr class="Checklisrow">
+
+                    <tr class="Checklisrow">
                         <th class="cell">
 
                             list no.
@@ -385,12 +389,12 @@
     {
 
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="checklistTable">
 
 
                 <thead>
 
-                    <tr>
+                    <tr class="Checklisrow">
                         <th>
 
                             list no.
@@ -454,12 +458,12 @@
 
 
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="checklistTable">
 
 
                 <thead>
 
-                    <tr>
+                    <tr class="Checklisrow">
                         <th>
 
                             list no.
@@ -529,12 +533,12 @@
     {
 
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="checklistTable">
 
 
                 <thead>
 
-                    <tr>
+                    <tr class="Checklisrow">
                         <th>
 
                             list no.
@@ -599,12 +603,12 @@
 
 
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="checklistTable">
 
 
                 <thead>
 
-                    <tr>
+                    <tr class="Checklisrow">
                         <th>
 
                             list no.
@@ -677,11 +681,12 @@
 
 
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="checklistTable">
 
 
                 <thead>
 
+                    <tr class="Checklisrow">
                     <tr>
                         <th class="cell">
 
@@ -743,68 +748,67 @@
     {
 
 
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <table class="checklistTable">
 
 
-                <thead>
+            <thead>
 
+                <tr class="Checklisrow">
+                    <th class="cell">
+
+                        list no.
+                    </th>
+                    <th class="cell">
+
+                        Date
+                    </th>
+                    <th class="cell">
+
+                        TDs Clean value
+
+                    </th>
+                    <th class="cell">
+
+                        TDs Main raw
+
+                    </th>
+                    <th class="cell">
+
+                        Conductive
+                    </th>
+
+                </tr>
+            </thead>
+
+            @{
+                foreach (var item in Model)
+                {
                     <tr>
-                        <th class="cell">
+                        <td class="cell">
+                            @counter3
+                        </td>
 
-                            list no.
-                        </th>
-                        <th class="cell">
-
-                            Date
-                        </th>
-                        <th class="cell">
-
-                            TDs Clean value
-
-                        </th>
-                        <th class="cell">
-
-                            TDs Main raw
-
-                        </th>
-                        <th class="cell">
-
-                            Conductive
-                        </th>
+                        <td class="cell">
+                            @item.date
+                        </td>
+                        <td class="cell">
+                            @item.TDs_clean
+                        </td>
+                        <td class="cell">
+                            @item.TDs_Main
+                        </td>
+                        <td class="cell">
+                            @item.Conductive
+                        </td>
 
                     </tr>
-                </thead>
-
-                @{
-                    foreach (var item in Model)
-                    {
-                        <tr>
-                            <td class="cell">
-                                @counter3
-                            </td>
-
-                            <td class="cell">
-                                @item.date
-                            </td>
-                            <td class="cell">
-                                @item.TDs_clean
-                            </td>
-                            <td class="cell">
-                                @item.TDs_Main
-                            </td>
-                            <td class="cell">
-                                @item.Conductive
-                            </td>
-
-                        </tr>
-                        counter3 += 1;
-
-                    }
+                    counter3 += 1;
 
                 }
-            </table>
-        </div>
+
+            }
+        </table>
+   
 
 
     }
@@ -823,12 +827,12 @@
     {
 
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="checklistTable">
 
 
                 <thead>
 
-                    <tr>
+                    <tr class="Checklisrow">
                         <th>
 
                             list no.
@@ -893,12 +897,12 @@
 
 
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="checklistTable">
 
 
                 <thead>
 
-                    <tr>
+                    <tr class="Checklisrow">
                         <th>
 
                             list no.

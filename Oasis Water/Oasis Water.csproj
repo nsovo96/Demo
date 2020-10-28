@@ -49,12 +49,18 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
@@ -148,18 +154,24 @@
     <Content Include="assets\formstyler\jquery.formstyler.min.js" />
     <Content Include="assets\formstyler\jquery.formstyler.theme.css" />
     <Content Include="assets\images\34431f40d2900ad9d7ef62946e3d009a-1024x932.jpeg" />
+    <Content Include="assets\images\815de3635559f25f601cdc2930333d38.jpeg" />
     <Content Include="assets\images\appleFlavour.jpg" />
     <Content Include="assets\images\background3.jpg" />
     <Content Include="assets\images\background8.jpg" />
+    <Content Include="assets\images\close-md.png" />
     <Content Include="assets\images\d3b151e890299572726517626d2d13cd.png" />
     <Content Include="assets\images\download-2-316x107.png" />
+    <Content Include="assets\images\images.png" />
     <Content Include="assets\images\nitchFlavour.jpg" />
     <Content Include="assets\images\oasis-logo-navy-121x41.png" />
+    <Content Include="assets\images\Oasis-Logo-Navy.png" />
+    <Content Include="assets\images\Oasis-Logo-White-120h.png" />
     <Content Include="assets\images\oasis-water-600x314.jpg" />
     <Content Include="assets\images\oasis-water-george-2-400x300.jpg" />
     <Content Include="assets\images\oasis-water-george-4-640x480.jpg" />
     <Content Include="assets\images\pineAppleFlavour.jpg" />
     <Content Include="assets\images\product1.jpg" />
+    <Content Include="assets\images\pure-oasis-water.png" />
     <Content Include="assets\images\refill-300x303.png" />
     <Content Include="assets\images\team1.jpg" />
     <Content Include="assets\images\team2.jpg" />
@@ -185,7 +197,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="css\main.css" />
+    <Content Include="css\Mymain.css" />
     <Content Include="css\util.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.css" />
@@ -195,7 +207,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="js\exporting.js" />
+    <Content Include="js\highcharts-more.js" />
+    <Content Include="js\highcharts.js" />
     <Content Include="js\main.js" />
+    <Content Include="js\OasisJS.js" />
+    <Content Include="js\scripts.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="assets\images\hashes.json" />
@@ -344,6 +361,9 @@
     <Content Include="Views\Tasks\AddNotification.cshtml" />
     <Content Include="Views\Products\addSaleData.cshtml" />
     <Content Include="Views\Products\addQuantity.cshtml" />
+    <Content Include="Views\CheckList\TEstCss.cshtml" />
+    <Content Include="Views\Shared\_testCss.cshtml" />
+    <Content Include="Views\CheckList\ViewReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

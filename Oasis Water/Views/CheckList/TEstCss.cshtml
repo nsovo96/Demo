@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "TEstCss";
+    Layout = "~/Views/Shared/_testCss.cshtml";
+}
+<header>
+    <h1>Make Divs with JS </h1>
+    <button class="btn-add">Add New</button>
+</header>
+<main>
+    <h2>New Containers</h2>
+    <div id="div-container"></div>
+</main>
+
+
+
+
+        <section>
+            <h2>Footer</h2>
+        </section>
+
+
+        <div>
+            <div id="surveycontent">
+
+                <input type="text" id="nameS" placeholder="Name of the survey" class="TXT" />
+                <input type="button" class="BtnAdd" value="add new" />
+                click add to a question
+            </div>
+        </div>
+
+
+        <script>
+
+            const BtnAdd = document.querySelector(".btn-add");
+            const DivContainer = document.getElementById("div-container");
+
+            BtnAdd.addEventListener("click", AddNew);
+
+            function AddNew() {
+                const newDiv = document.createElement("input");
+                console.log("add");
+
+                newDiv.classList.add("div-shadow");
+                newDiv.type = "text";
+                newDiv.name = document.getElementById("nameS");
+                DivContainer.appendChild(newDiv);
+            }
+
+        </script>

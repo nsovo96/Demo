@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Oasis_Water.Controllers
 {
@@ -20,7 +22,7 @@ namespace Oasis_Water.Controllers
         }
 
 
-        //Send Task Type
+        //Send oasisTask Type
         public ActionResult SendTaskType()
         {
             return RedirectToAction("NewTask", new { tasktype = "DailyTask" });
@@ -41,7 +43,7 @@ namespace Oasis_Water.Controllers
         {
 
 
-            Task MynewTask = new Task("Insert_no_model");
+            oasisTask MynewTask = new oasisTask("Insert_no_model");
             NotificationsDisplay notifications = new NotificationsDisplay();
             MynewTask.NewTask(Convert.ToInt32(Session["userId"]), "assgined", Taksdetail);
 
@@ -61,14 +63,14 @@ namespace Oasis_Water.Controllers
         }
         //post new task detail//this are pre difined tasks
         [HttpPost]
-        public ActionResult OasisTask(string NewTask)
+        public ActionResult OasisTask(string NewTask,string id)
         {
 
-
-            Task MynewTask = new Task("Insert_no_model");
-
+            oasisTask MynewTask = new oasisTask("Insert_no_model");
             MynewTask.NewTask(Convert.ToInt32(Session["userId"]), "oasisTask", NewTask);
 
+            NotificationsDisplay notifications = new NotificationsDisplay();
+            notifications.Delete(Convert.ToInt32(id));
             return RedirectToAction("GetTask");
         }
 
@@ -84,7 +86,7 @@ namespace Oasis_Water.Controllers
 
         public ActionResult GetTask()
         {
-            Task notifications = new Task("Select");
+            oasisTask notifications = new oasisTask("Select");
 
             List<Tasks> pNotiList = new List<Tasks>();
 
@@ -116,10 +118,12 @@ namespace Oasis_Water.Controllers
             }
             else
             {
-                Task updateTask = new Task("Update");
+                oasisTask updateTask = new oasisTask("Update");
 
                 updateTask.Update(TaskID);
 
+
+                
 
                 return RedirectToAction("GetTask");
 
@@ -129,10 +133,11 @@ namespace Oasis_Water.Controllers
         }
 
         //update task and notify management
+        static int  staticTaskid;
         public ActionResult AddNotification(int TaskID)
         {
-
-            Task Mytask = new Task("Select");
+            staticTaskid = TaskID;
+            oasisTask Mytask = new oasisTask("Select");
 
             Session.Remove("taskID");
 
@@ -161,7 +166,10 @@ namespace Oasis_Water.Controllers
         public ActionResult AddNotification(string Notification)
         {
             NotificationsDisplay notifications = new NotificationsDisplay();
-            notifications.CreateAnotification("Task fulfiled, Task detail read as follow: " + Notification, "Manager");
+            notifications.CreateAnotification("A mantainance task is completed new readings : " + Notification, "Manager");
+            oasisTask updateTask = new oasisTask("Update");
+
+            updateTask.Update(staticTaskid);
             return RedirectToAction("HomeIndex", "Home");
         }
 
@@ -172,7 +180,7 @@ namespace Oasis_Water.Controllers
         //task collaboration
         public ActionResult TaskColobaration()
         {
-            Task notifications = new Task("Select");
+            oasisTask notifications = new oasisTask("Select");
 
             List<Tasks> pNotiList = new List<Tasks>();
 
@@ -209,25 +217,26 @@ namespace Oasis_Water.Controllers
         }
 
         [HttpPost]
-        public ActionResult MyColaboration(string Comment)
+        public ActionResult MyColaboration(string Comment,int idtask)
         {
-
+            
             Coloboration coloborations = new Coloboration("Insert");
 
             coloborations.SendCollab(Convert.ToInt32(Session["userId"]), Taskid, Comment, Session["taskDetail"].ToString());
               
              NotificationsDisplay notifications = new NotificationsDisplay();
-            notifications.CreateAnotification("A collaboration on a task with details of : ' " + Session["taskDetail"].ToString() + " ' has occured ", "Manager");
-            notifications.CreateAnotification("A collaboration on a task with details of : '" + Session["taskDetail"].ToString() + " ' has occured ", "ProccessAreaEmployee");
-            notifications.CreateAnotification("A collaboration on a task with details of : ' " + Session["taskDetail"].ToString() + " ' has occured ", "StorageAreaEmployee");
-            notifications.CreateAnotification("A collaboration on a task with details of ' " + Session["taskDetail"].ToString() + " ' has occured ", "FrontEndEmployee");
-            notifications.CreateAnotification("A collaboration on a task with details of ' " + Session["taskDetail"].ToString() + " ' has occured ", "ProccessMaintananceEmployee");
+            notifications.CreateAnotificationColaboration("A collaboration on a task with details of : ' " + Session["taskDetail"].ToString() + " ' has occured ", "Manager", idtask);
+            notifications.CreateAnotificationColaboration("A collaboration on a task with details of : '" + Session["taskDetail"].ToString() + " ' has occured ", "ProccessAreaEmployee", idtask);
+            notifications.CreateAnotificationColaboration("A collaboration on a task with details of : ' " + Session["taskDetail"].ToString() + " ' has occured ", "StorageAreaEmployee", idtask);
+            notifications.CreateAnotificationColaboration("A collaboration on a task with details of ' " + Session["taskDetail"].ToString() + " ' has occured ", "FrontEndEmployee", idtask);
+            notifications.CreateAnotificationColaboration("A collaboration on a task with details of ' " + Session["taskDetail"].ToString() + " ' has occured ", "ProccessMaintananceEmployee", idtask);
 
             Session.Remove("taskDetail");
 
             return RedirectToAction("Colaboration", new { Taskid = Taskid }); ;
         }
 
-       
+      
+
     }
 }

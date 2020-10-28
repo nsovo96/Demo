@@ -84,7 +84,7 @@ namespace DataAccessLayer.Models
         public string RecieverRole { get; set; }
         public string Notification { get; set; }
         public DateTime datesent { get; set; }
-        public int Fk_TaskID { get; set; }
+        public int TaskID { get; set; }
         public string isActive { get; set; }
 
         
@@ -148,7 +148,7 @@ namespace DataAccessLayer.Models
         [Range(typeof(decimal), "1", "100", ErrorMessage = "Invalid ")]
         public decimal _7_Flow_Rate_RAW  { get; set; }
         [Required]
-        public string    _8_Flow_Rate_Clean  { get; set; }
+        public decimal    _8_Flow_Rate_Clean  { get; set; }
         [Required]
         public string   _9_Pump_Functional  { get; set; }
         [Required]

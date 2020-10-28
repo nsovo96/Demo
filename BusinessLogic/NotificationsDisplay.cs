@@ -133,7 +133,7 @@ namespace BusinessLogic
                         +
                         " ," + methodInfo1[6].Name.Replace("get_", "") + " = " + "'" + Item.datesent + "'"
                         +
-                        " ," + methodInfo1[8].Name.Replace("get_", "") + " = " + "'" + Item.Fk_TaskID + "'"
+                        " ," + methodInfo1[8].Name.Replace("get_", "") + " = " + "'" + Item.TaskID + "'"
                         +
                         " ," + methodInfo1[10].Name.Replace("get_", "") + " = " + "'" + Item.isActive + "'"
 
@@ -207,9 +207,46 @@ namespace BusinessLogic
                     }
 
         }
-           
+        public string CreateAnotificationColaboration(string NotificationDetail, string recieverRole,int TaskID)
+        {
 
-        
+
+
+            var queryInsertNotification = "insert into Notifications (RecieverRole,Notification,datesent,TaskID) values(@RecieverRole,@Notification,@datesent,@TaskID)";
+
+            SqlConnection sqlConnection = new SqlConnection(ConnectionStr);
+
+            SqlCommand insertcommand = new SqlCommand(queryInsertNotification, sqlConnection);
+
+            insertcommand.Parameters.AddWithValue("@RecieverRole", recieverRole);
+            insertcommand.Parameters.AddWithValue("@Notification", NotificationDetail);
+            insertcommand.Parameters.AddWithValue("@datesent", DateTime.Now.ToLocalTime());
+            insertcommand.Parameters.AddWithValue("@TaskID", TaskID);
+
+
+            sqlConnection.Open();
+
+            int results = insertcommand.ExecuteNonQuery();
+
+            if (results > 0)
+            {
+                sqlConnection.Close();
+
+                return " did it";
+
+            }
+            else
+            {
+                sqlConnection.Close();
+
+                return "im sorry we cant";
+
+            }
+
+        }
+
+
+
 
         //select all products in our database
         public List<Notifications> dispalayNotifications ()
@@ -230,6 +267,12 @@ namespace BusinessLogic
                     noticat.isActive = rd["isActive"].ToString();
                     noticat.Notification = rd["Notification"].ToString();
                     noticat.datesent = Convert.ToDateTime(rd["datesent"]);
+                    string taskid = rd["TaskID"].ToString();
+
+                    if(taskid!="")
+                    {
+                        noticat.TaskID =Convert.ToInt32( rd["TaskID"]);
+                    }
 
                     noticat.id = Convert.ToInt32(rd["id"]);
 
@@ -246,16 +289,22 @@ namespace BusinessLogic
 
         }
 
-        public void Delete(int UserID)
+        public void Delete(int ID)
         {
-            SqlCommand Deletecommand = GetSqlCommand(UserID);
-            oasisconnectionString.Open();
+
+          var sqlco= "DELETE FROM Notifications WHERE id= " + ID;
+
+            SqlConnection sqlConnection = new SqlConnection(ConnectionStr);
+
+            SqlCommand deletecommand = new SqlCommand(sqlco, sqlConnection);
+
+            sqlConnection.Open();
             // int counter = 0;
 
-            Deletecommand.CommandType = CommandType.Text;
+            deletecommand.CommandType = CommandType.Text;
 
-            Deletecommand.ExecuteNonQuery();
-            oasisconnectionString.Close();
+            deletecommand.ExecuteNonQuery();
+            sqlConnection.Close();
 
         }
 

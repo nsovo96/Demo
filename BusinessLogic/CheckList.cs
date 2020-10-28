@@ -366,7 +366,7 @@ namespace BusinessLogic
                     checkList._5_1_Micron_Preasure = Convert.ToDecimal(rd["_5_1_Micron_Preasure"]);
                     checkList._6_Membrane_Preasure = Convert.ToDecimal(rd["_6_Membrane_Preasure"]);
                     checkList._7_Flow_Rate_RAW = Convert.ToDecimal(rd["_7_Flow_Rate_RAW"]);
-                    checkList._8_Flow_Rate_Clean = rd["_8_Flow_Rate_Clean"].ToString();
+                    checkList._8_Flow_Rate_Clean = Convert.ToDecimal(rd["_8_Flow_Rate_Clean"]);
                     checkList._9_Pump_Functional =rd["_9_Pump_Functional"].ToString();
                     checkList.Conductive = Convert.ToDecimal(rd["Conductive"]);
                     checkList.Clean_Water_Meter_Reading = Convert.ToDecimal(rd["Clean_Water_Meter_Reading"]);

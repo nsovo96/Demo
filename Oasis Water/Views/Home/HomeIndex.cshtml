@@ -4,150 +4,545 @@
     ViewBag.Title = "HomeIndex";
     Layout = "~/Views/Shared/" + Session["addtoLayout"].ToString();
 }
+<link href="~/css/Mymain.css" rel="stylesheet" />
+<script src="~/js/OasisJS.js"></script>
+<script src="~/js/exporting.js"></script>
+<script src="~/js/highcharts.js"></script>
+<link href="~/css/Mymain.css" rel="stylesheet" />
+<script src="~/js/OasisJS.js"></script>
+<script src="~/js/highcharts-more.js"></script>
+<link href="~/css/CalendarPicker.style.css" rel="stylesheet" />
+<script src="~/js/CalendarPicker.js"></script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+@using DataAccessLayer.Models;
+@using BusinessLogic;
 
 
 
 @{
+    List<DataAccessLayer.Models.Users> user = (List<DataAccessLayer.Models.Users>)Session["userdetails"];
 
-                if (Session["UserRole"].ToString() == "ProccessMaintananceEmployee")
+    //get tasks
+    oasisTask Tasks = new oasisTask("Select");
+
+    List<Tasks> AllTasks = new List<Tasks>();
+
+    AllTasks = Tasks.GetTasks();
+
+
+
+    //get users
+
+    List<Users> userManager = new List<Users>();
+
+
+    UserAccounts AccountList = new UserAccounts("Select");
+
+    userManager = AccountList.Login();
+}
+<div class="Bodycontainer">
+
+
+    <div class="notifi" id="ScroNotifications">
+
+        @{
+
+
+    <section>
+        <!---->
+
+
+        <div class="Mynotifications">
+            <div class="mbr-section-head">
+                <h3 class="mbr-section-title mbr-fonts-style mb-0 display-2"><strong>Notification center</strong></h3>
+
+            </div>
+            <form id="tasksubmit" action="../Tasks/OasisTask" method="post">
+
+                @foreach (var item in Model)
                 {
 
-        <section class="features9 cid-scI5TakMZp" id="features10-r">
-            <!---->
+                    if (item.TaskID > 0)
+                    {
+                        <div>
+
+                            <div class="date">
+                                @Html.DisplayFor(modelItem => item.datesent)
 
 
-            <div class="container">
-                <div class="mbr-section-head">
-                    <h3 class="mbr-section-title mbr-fonts-style mb-0 display-2"><strong>Notification center</strong></h3>
-
-                </div>
-                
-
-
-            @foreach (var item in Model)
-            {
-
-
-
-
-                    <div class="row mt-4">
-                        <div class="card col-12">
-                            <div class="card-wrapper">
-                                <div class="top-line row">
-                                    <div class="col">
-                                    </div>
-                                    <div class="col-auto">
-                                        <p class="price mbr-fonts-style display-5">
-                                            @Html.DisplayFor(modelItem => item.datesent)
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="bottom-line">
-                                    <p class="mbr-text mbr-fonts-style display-7">
-                                        @Html.DisplayFor(modelItem => item.Notification)
-                                        <br />
-                                        @Html.ActionLink("Details", "ViewNotification", new { id = item.id }) 
-                                    </p>
-                                   
-                                   
-                                </div>
-                                
                             </div>
+
+                            <div class="notificationHome">
+
+                            @item.Notification
+
+                            </div>
+                            <div class="BtnArea" style="padding-bottom:10px;">
+
+                                <a class="btnSUb" href="@Url.Action( "Colaboration","Tasks", new { TaskID = item.TaskID })">View Collaboration</a>
+                                <a class="btnSUb" href="@Url.Action("Delete", new { TaskID = item.id })">Delete</a>
+
+
+                                @*<input type="button" class="btnSUb" value="Accept task" onclick="myFunction()" />*@
+
+                                @*<input type="button" class="btnSUb" value="Accept task" onclick="accept('@item.id')" id="@item.id" />*@
+
+
+                                <input type="hidden" name="NewTask" id="newt" />
+                                <input type="hidden" name="id" id="NotID" />
+
+
+
+                            </div>
+
+
+                            <hr />
+
+
                         </div>
 
+                    }
+                    else
+                    {
+
+                        if (Session["UserRole"].ToString() == "Manager")
+                        {
+
+                            <div>
+
+                                <div class="date">
+                                    @Html.DisplayFor(modelItem => item.datesent)
+
+
+                                </div>
+
+                                <div class="notificationHome">
+
+                  @item.Notification
+
+
+                                </div>
+                                <div class="BtnArea" style="padding-bottom:10px;">
+
+                                    <a class="btnSUb" href="@Url.Action("Delete", new { TaskID = item.id })">Delete</a>
+
+                                    @*<input type="button" class="btnSUb" value="Accept task" onclick="myFunction()" />*@
+
+                                    @*<input type="button" class="btnSUb" value="Accept task" onclick="accept('@item.id')" id="@item.id" />*@
+
+
+                                    <input type="hidden" name="NewTask" id="newt" />
+                                    <input type="hidden" name="id" id="NotID" />
 
 
 
-                    </div>
+                                </div>
+
+
+                                <hr />
+
+
+                            </div>
+
+
+                        }
+                        else
+                        {
+
+                            <div>
+
+                                <div class="date">
+                                    @Html.DisplayFor(modelItem => item.datesent)
+
+
+                                </div>
+
+                                <div class="notificationHome">
+
+                                    @Html.DisplayFor(modelItem => item.Notification)
+
+
+                                </div>
+                                <div class="BtnArea">
+
+                                    <input type="button" class="btnSUb" value="Accept task" onclick="myFunction('@item.Notification','@item.id')" id="@item.id" />
+
+                                    @*<input type="button" class="btnSUb" value="Accept task" onclick="myFunction()" />*@
+
+                                    @*<input type="button" class="btnSUb" value="Accept task" onclick="accept('@item.id')" id="@item.id" />*@
+
+
+                                    <input type="hidden" name="NewTask" id="newt" />
+                                    <input type="hidden" name="id" id="NotID" />
+
+
+
+                                </div>
+
+
+                                <hr />
+
+
+                            </div>
+
+
+                        }
+
+
+
+                    }
+
+
 
 
 
                 }
 
-
-
-
-
-
-
-
-
-            </div>
-        </section>
-
-    }
-    else
-    {
-
-
-<section class="features9 cid-scI5TakMZp" id="features10-r">
-    <!---->
-
-
-    <div class="container">
-        <div class="mbr-section-head">
-            <h3 class="mbr-section-title mbr-fonts-style mb-0 display-2"><strong>Notification center</strong></h3>
+            </form>
 
         </div>
 
-        @foreach (var item in Model)
-        {
+    </section>
+
+
+            }
+
+
+    </div>
+
+
+</div>
 
 
 
-            <div class="row mt-4">
-                <div class="card col-12">
-                    <div class="card-wrapper">
-                        <div class="top-line row">
-                            <div class="col">
+
+
+
+
+
+
+
+
+@*<div class="containerNotification">
+        <div class="parent">
+
+            <div class="column" id="ScroNotifications">
+
+                <section class="features24 cid-scJcltxsHj" id="features1-17" style="background-color:aquamarine">
+
+
+
+                    <div class="container" id="Tasktable">
+                        <div class="row" id="Taskrow">
+                            <div class="col-12">
+                                <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+                                    <strong>Open oasisTask</strong>
+                                </h3>
+
                             </div>
-                            <div class="col-auto">
-                                <p class="price mbr-fonts-style display-5">
-                                    @Html.DisplayFor(modelItem => item.datesent)
-                                </p>
+
+
+                            <div class="card col-12 col-md-6 col-lg-3">
+                                <div class="card-wrapper">
+                                    <div class="card-box align-center">
+                                        <div class="iconfont-wrapper">
+                                            <span class="mbr-iconfont mobi-mbri-calendar mobi-mbri"></span>
+                                        </div>
+                                        <h5 class="card-title mbr-fonts-style display-7"><strong>No.</strong></h5>
+
+                                        @{
+                                            int count = 0;
+                                            foreach (var t in AllTasks)
+                                            {
+
+                                                foreach (var u in userManager)
+                                                {
+                                                    if (t.Fk_EmployeeID == Convert.ToInt32(Session["userId"]))
+                                                    {
+                                                        count += 1;
+
+
+
+                                                        <p class="card-text mbr-fonts-style display-7" style="padding-bottom:40px;">@count</p>
+
+
+
+                                                    }
+                                                }
+                                            }
+
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card col-12 col-md-6 col-lg-3" style="padding-bottom:300px">
+                                <div class="card-wrapper">
+                                    <div class="card-box align-center">
+                                        <div class="iconfont-wrapper">
+                                            <span class="mbr-iconfont mobi-mbri-contact-form mobi-mbri"></span>
+                                        </div>
+                                        <h5 class="card-title mbr-fonts-style display-7"><strong>Date</strong></h5>
+                                        @{
+                                            foreach (var t in AllTasks)
+                                            {
+
+                                                foreach (var u in userManager)
+                                                {
+                                                    if (t.Fk_EmployeeID == Convert.ToInt32(Session["userId"]))
+                                                    {
+
+
+                                                        <p class="card-text mbr-fonts-style display-7"style="padding-bottom:20px;">@t.dateAssigned</p>
+
+
+
+
+
+                                                    }
+                                                }
+                                            }
+
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card col-12 col-md-6 col-lg-3" style="padding-bottom:300px">
+                                <div class="card-wrapper">
+                                    <div class="card-box align-center">
+                                        <div class="iconfont-wrapper">
+                                            <span class="mbr-iconfont mobi-mbri-numbered-list mobi-mbri"></span>
+                                        </div>
+                                        <h5 class="card-title mbr-fonts-style display-7"><strong>oasisTask Detail</strong></h5>
+                                        @{
+                                            foreach (var t in AllTasks)
+                                            {
+
+                                                foreach (var u in userManager)
+                                                {
+                                                    if (t.Fk_EmployeeID == Convert.ToInt32(Session["userId"]))
+                                                    {
+                                                        <p class="card-text mbr-fonts-style display-7">@t.Taskdetail</p>
+
+
+                                                    }
+                                                }
+                                            }
+
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card col-12 col-md-6 col-lg-3">
+                                <div class="card-wrapper">
+                                    <div class="card-box align-center">
+                                        <div class="iconfont-wrapper">
+                                            <span class="mbr-iconfont mobi-mbri-pin mobi-mbri"></span>
+                                        </div>
+                                        <h5 class="card-title mbr-fonts-style display-7"><strong>oasisTask status</strong></h5>
+                                        @{
+                                            foreach (var t in AllTasks)
+                                            {
+
+                                                foreach (var u in userManager)
+                                                {
+                                                    if (t.Fk_EmployeeID == Convert.ToInt32(Session["userId"]))
+                                                    {
+                                                        <p class="card-text mbr-fonts-style display-7" style="padding-bottom:40px;">@t.TaskStatus</p>
+
+
+                                                    }
+                                                }
+                                            }
+
+                                        }
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="bottom-line">
-                            <p class="mbr-text mbr-fonts-style display-7">
-                                @Html.DisplayFor(modelItem => item.Notification)
-                                <br />
-
-                                @Html.ActionLink("Details", "ViewNotification", new { id = item.id }) 
-
-                            </p>
-
-                        </div>
-
-
                     </div>
-                </div>
-
-
-
+                </section>
 
             </div>
 
 
+
+
+        </div>
+
+    </div>*@
+
+<div class="myrate">
+    <h4>Your perfomance is very low</h4>
+
+</div>
+<figure class="highcharts-figure" id="Overalperfomance">
+    <div id="container"></div>
+    <p class="highcharts-description">
+
+    </p>
+</figure>
+
+<script>
+
+$(document).ready(function () {
+
+    Highcharts.setOptions({
+        colors: ['#00FF00', '#FF0000']
+    });
+    var chart;
+
+    var userID = '@Session["Myusername"]';
+
+    var completed = 0;
+    var notccompleted = 0;
+    $.getJSON("/Home/myperformance", function (data) {
+        for (var i = 0; i < data.length; i++) {
+
+
+            if (userID == data[i].EmployeeName) {
+                completed = data[i].CompletedTaskEv;
+                notccompleted = data[i].NotCompletedTaskEv;
+
+            }
 
         }
 
 
+        chart = new Highcharts.Chart({
+
+            chart: {
+
+                renderTo: 'container',
+
+                plotBackgroundColor: null,
+
+                plotBorderWidth: null,
+
+                plotShadow: false
+
+            },
+
+            title: {
+
+                text: 'Your perfomance at oasis'
+
+            },
+
+            tooltip: {
+
+                formatter: function () {
+
+                    return '<b>' + this.point.name + '</b>: ' + this.percentage + ' %';
+
+                }
+
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+
+                pie: {
+
+                    allowPointSelect: true,
+
+                    cursor: 'pointer',
+
+                    dataLabels: {
+
+                        enabled: true,
+
+                        color: '#000000',
+
+                        connectorColor: '#000000',
+
+                        formatter: function () {
+
+                            return '<b>' + this.point.name + '</b>: ' + this.percentage + ' %';
+
+                        }
+
+                    }
+
+                }
+
+            },
+
+            series: [{
+
+                type: 'pie',
+
+                name: 'My Perfomance',
+
+                data: [
+
+                    ['Complted tasks', completed],
 
 
+                    {
+
+                        name: 'Not completed tasks',
+
+                        y: notccompleted,
+
+                        sliced: true,
+
+                        selected: true
+
+                    },
+
+                ]
+
+            }]
+
+        });
+
+    });
+
+});
+</script>
 
 
+<script>
 
+    function acceptted(data) {
 
-
-    </div>
-</section>
-
-
-
+        alert(data);
+        var y = document.getElementById(data);
+        y.value = "Open Curtain";
+        y.innerHTML = "Open Curtain";
 
     }
 
-
+   
+    function myFunction(data,id) {
+        var txt;
+        if (confirm("press ok to accept the task or cancel")) {
+            var task = document.getElementById("newt");
+            task.value = data;
+            var myid = document.getElementById("NotID");
+            myid.value = id;
+            document.getElementById("tasksubmit").submit();
+        } else {
+            txt = "You pressed Cancel!";
+        }
+        document.getElementById("demo").innerHTML = txt;
     }
 
-       
+
+</script>
+
+
+
+
+
+
+
+

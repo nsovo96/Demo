@@ -3,11 +3,12 @@
     Layout = "~/Views/Shared/" + Session["addtoLayout"].ToString();
 }
 
+<link href="~/css/Mymain.css" rel="stylesheet" />
 
         <section class="form5 cid-scK839D4Fn" id="form5-1p">
 
 
-            <div class="container">
+            <div class="container" style="background-color:gray">
                 <div class="mbr-section-head">
                     <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
                         <strong>Check list data</strong>
@@ -72,7 +73,7 @@
                                 <div class="col-md col-sm-12 form-group" data-for="name">
                                     <input type="number" name="_7_Flow_Rate_RAW" placeholder="Flow Rate RAW value" class="form-control">
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button type="submit" class="btn btn-primary display-4">Log data</button></div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button type="submit" class="btn btn-primary display-4" id="btnChecklist">Log data</button></div>
 
                             </div>
                             <hr />

@@ -15,14 +15,12 @@
         <div class="row">
             <div class="col-12">
                 <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
-                    <strong>Morning Task</strong>
+                    <strong>OPEN TASKS</strong>
                 </h3>
 
             </div>
 
             <table>
-                
-
             </table>
             <div class="card col-12 col-md-6 col-lg-3">
                 <div class="card-wrapper">
@@ -36,29 +34,26 @@
                             foreach (var item in Model)
                             {
 
-                                string v = item.dateAssigned.ToString("tt", CultureInfo.InvariantCulture);
 
-                           
-                                    if (v == "AM")
-                                    {
 
-                                        if (item.Fk_EmployeeID == Convert.ToInt32(Session["userId"]))
-                                        {
 
-                                            <p class="card-text mbr-fonts-style display-7">@item.dateAssigned</p>
-                                           
-                                            <hr />
-                                           
-                                        }
+                                if (item.Fk_EmployeeID == Convert.ToInt32(Session["userId"]) && item.TaskStatus == "Started")
+                                {
+
+                                        <p class="card-text mbr-fonts-style display-7">@item.dateAssigned</p>
+
+                                        <hr />
+
                                     }
                                 
+
 
                             }
                         }
                     </div>
                 </div>
             </div>
-        
+
             <div class="card col-12 col-md-6 col-lg-3">
                 <div class="card-wrapper">
                     <div class="card-box align-center">
@@ -70,28 +65,24 @@
                             foreach (var item in Model)
                             {
 
-                                string v = item.dateAssigned.ToString("tt", CultureInfo.InvariantCulture);
+                             
 
-                            
-                                    if (v == "AM")
+                                    if (item.Fk_EmployeeID == Convert.ToInt32(Session["userId"]) && item.TaskStatus == "Started")
                                     {
+                                        <p class="card-text mbr-fonts-style display-7">@item.TaskStatus</p>
 
-                                        if (item.Fk_EmployeeID == Convert.ToInt32(Session["userId"]))
-                                        {
-                                            <p class="card-text mbr-fonts-style display-7">@item.TaskStatus</p>
-                                           
-                                            <hr />
-                                          
-                                        }
+                                        <hr />
+
                                     }
                                 
+
 
                             }
                         }
                     </div>
                 </div>
             </div>
-        
+            <hr />
             <div class="card col-12 col-md-6 col-lg-3">
                 <div class="card-wrapper">
                     <div class="card-box align-center">
@@ -102,59 +93,82 @@
                         @{
                             foreach (var item in Model)
                             {
-                                string v = item.dateAssigned.ToString("tt", CultureInfo.InvariantCulture);
+                                
 
-                             
-                                    if (v == "AM")
+                                    if (item.Fk_EmployeeID == Convert.ToInt32(Session["userId"]) && item.TaskStatus == "Started")
                                     {
 
-                                        if (item.Fk_EmployeeID == Convert.ToInt32(Session["userId"]))
-                                        {
+                                        <p class="card-text mbr-fonts-style display-7">@item.Taskdetail</p>
 
-                                            <p class="card-text mbr-fonts-style display-7">@item.Taskdetail</p>
-                                            
-                                            <hr />
-                                          
-                                        }
+                                        <hr />
+
                                     }
                                 
+
                             }
                         }
                     </div>
                 </div>
             </div>
-         
+            <hr />
             <div class="card col-12 col-md-6 col-lg-3">
                 <div class="card-wrapper">
                     <div class="card-box align-center">
                         <div class="iconfont-wrapper">
                             <span class="mbr-iconfont mobi-mbri-pin mobi-mbri"></span>
                         </div>
-                        <h5 class="card-title mbr-fonts-style display-7"><strong>Complete task</strong></h5>
+                        <h5 class="card-title mbr-fonts-style display-7"><strong>Time remaining</strong></h5>
                         @{
                             foreach (var item in Model)
                             {
 
-                                string v = item.dateAssigned.ToString("tt", CultureInfo.InvariantCulture);
+                                if (item.Fk_EmployeeID == Convert.ToInt32(Session["userId"]) && item.TaskStatus == "Started")
+                                {
+                                    int day = item.dateAssigned.Day - DateTime.Now.Day;
+                                    int month = item.dateAssigned.Month - DateTime.Now.Month;
+                                    int year = item.dateAssigned.Year - DateTime.Now.Year;
+                                    int minute = item.dateAssigned.Minute - DateTime.Now.Minute;
+                                    int hour = item.dateAssigned.Hour - DateTime.Now.Hour;
 
-                          
-                                    if (v == "AM")
+                                    int y = System.Math.Abs(year);
+                                    int m = System.Math.Abs(month);
+
+                                    int d = System.Math.Abs(day);
+                                    int h = System.Math.Abs(hour);
+
+                                    int mn = System.Math.Abs(minute);
+
+
+                                    if (h == 1)
                                     {
-
-                                        if (item.Fk_EmployeeID == Convert.ToInt32(Session["userId"]))
-                                        {
-                                            @Html.ActionLink("Complete task", "UpdateTask", new { TaskID = item.id })
                                         
-                                            <hr />
-                                        
-                                        }
+                                        <p class="card-text mbr-fonts-style display-7" style="padding-left:60px;">
+                                            @mn miutes  &emsp;&emsp;&emsp;  @Html.ActionLink("Complete task", "UpdateTask", new { TaskID = item.id })
+                                        </p>
                                     }
-                                
+                                    else
+                                    {
+                                      
+                                        int timere = System.Math.Abs(mn-60);
+
+                                        <p class="card-text mbr-fonts-style display-7" style="padding-left:60px;">
+                                            @timere miutes  &emsp;&emsp;&emsp;  @Html.ActionLink("Complete task", "UpdateTask", new { TaskID = item.id })
+                                        </p>
+                                    }
+
+
+                                    <hr />
+
+                                }
+
+
                             }
                         }
                     </div>
                 </div>
             </div>
+            <hr />
+           
         </div>
     </div>
 </section>
@@ -203,7 +217,7 @@
         <div class="row">
             <div class="col-12">
                 <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
-                    <strong>Afternoon Task</strong>
+                    <strong>CLOSED TASKS</strong>
                 </h3>
 
             </div>
@@ -219,57 +233,21 @@
                             foreach (var item in Model)
                             {
 
-                                string v = item.dateAssigned.ToString("tt", CultureInfo.InvariantCulture);
 
-                                if (item.TaskType == "oasisTask")
+
+
+                                if (item.Fk_EmployeeID == Convert.ToInt32(Session["userId"]))
                                 {
-                                    if (v == "PM")
+                                    if (item.TaskStatus == "Completed" || item.TaskStatus == "Auto Completed")
                                     {
-
-                                        if (item.Fk_EmployeeID == Convert.ToInt32(Session["userId"]))
-                                        {
 
                                             <p class="card-text mbr-fonts-style display-7">@item.dateAssigned</p>
-                                            
-                                            <hr />
-                                           
-                                        }
                                     }
-                                }
-
-                            }
-                        }
-                    </div>
-                </div>
-            </div>
-         
-            <div class="card col-12 col-md-6 col-lg-3">
-                <div class="card-wrapper">
-                    <div class="card-box align-center">
-                        <div class="iconfont-wrapper">
-                            <span class="mbr-iconfont mobi-mbri-contact-form mobi-mbri"></span>
-                        </div>
-                        <h5 class="card-title mbr-fonts-style display-7"><strong>Task Status</strong></h5>
-                        @{
-                            foreach (var item in Model)
-                            {
-
-                                string v = item.dateAssigned.ToString("tt", CultureInfo.InvariantCulture);
-
-                                if (item.TaskType == "oasisTask")
-                                {
-                                    if (v == "PM")
-                                    {
-
-                                        if (item.Fk_EmployeeID == Convert.ToInt32(Session["userId"]))
-                                        {
-                                            <p class="card-text mbr-fonts-style display-7">@item.TaskStatus</p>
-                                            
                                             <hr />
-                                          
+
                                         }
-                                    }
-                                }
+                                    
+                                
 
                             }
                         }
@@ -283,65 +261,66 @@
                         <div class="iconfont-wrapper">
                             <span class="mbr-iconfont mobi-mbri-numbered-list mobi-mbri"></span>
                         </div>
-                        <h5 class="card-title mbr-fonts-style display-7"><strong>Task Detail</strong></h5>
+                        <h5 class="card-title mbr-fonts-style display-7"><strong>oasisTask Detail</strong></h5>
                         @{
                             foreach (var item in Model)
                             {
-                                string v = item.dateAssigned.ToString("tt", CultureInfo.InvariantCulture);
 
-                                if (item.TaskType == "oasisTask")
+
+
+                                if (item.Fk_EmployeeID == Convert.ToInt32(Session["userId"]) )
                                 {
-                                    if (v == "PM")
+                                    if (item.TaskStatus == "Completed" || item.TaskStatus == "Auto Completed")
                                     {
-
-                                        if (item.Fk_EmployeeID == Convert.ToInt32(Session["userId"]))
-                                        {
-
-                                            <p class="card-text mbr-fonts-style display-7">@item.Taskdetail</p>
-                                            
-                                            <hr />
-                                           
-                                        }
+                                    <p class="card-text mbr-fonts-style display-7">@item.Taskdetail</p>
                                     }
+                                    <hr />
+
                                 }
+
+
                             }
                         }
                     </div>
                 </div>
             </div>
             <hr />
+
             <div class="card col-12 col-md-6 col-lg-3">
                 <div class="card-wrapper">
                     <div class="card-box align-center">
                         <div class="iconfont-wrapper">
-                            <span class="mbr-iconfont mobi-mbri-pin mobi-mbri"></span>
+                            <span class="mbr-iconfont mobi-mbri-contact-form mobi-mbri"></span>
                         </div>
-                        <h5 class="card-title mbr-fonts-style display-7"><strong>Complete task</strong></h5>
+                        <h5 class="card-title mbr-fonts-style display-7"><strong>oasisTask Status</strong></h5>
                         @{
                             foreach (var item in Model)
                             {
 
-                                string v = item.dateAssigned.ToString("tt", CultureInfo.InvariantCulture);
 
-                                if (item.TaskType == "oasisTask")
+
+
+                                if (item.Fk_EmployeeID == Convert.ToInt32(Session["userId"]))
                                 {
-                                    if (v == "PM")
+                                    if (item.TaskStatus == "Completed" || item.TaskStatus == "Auto Completed")
                                     {
+                                        <p class="card-text mbr-fonts-style display-7">@item.TaskStatus</p>
 
-                                        if (item.Fk_EmployeeID == Convert.ToInt32(Session["userId"]))
-                                        {
-                                            @Html.ActionLink("Complete task", "UpdateTask", new { TaskID = item.id })
-                                         
-                                            <hr />
-                                    
-                                        }
                                     }
+
+                                    <hr />
+
+
+
                                 }
+
                             }
                         }
                     </div>
                 </div>
             </div>
+            <hr />
+
         </div>
     </div>
 </section>

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-  public  class Task
+  public  class oasisTask
     {
 
         List<Tasks> TaskM = new List<Tasks>();
@@ -21,7 +21,7 @@ namespace BusinessLogic
         public Tasks Item;
         public string key = "";
         //my constructors
-        public Task(Tasks Item, string key)
+        public oasisTask(Tasks Item, string key)
 
         {
             
@@ -30,13 +30,13 @@ namespace BusinessLogic
             this.key = key;
         }
 
-        public Task(string key)
+        public oasisTask(string key)
         {
             this.key = key;
         }
 
 
-        public Task()
+        public oasisTask()
         {
         }
 
@@ -116,7 +116,7 @@ namespace BusinessLogic
 
                 case "Update":
 
-                    query = "Update Tasks SET TaskStatus='" + " Completed" + " ," + " DateFinished=" + DateTime.Now + "' where id='" + id + " '";
+                    query = "Update Tasks SET TaskStatus='" + "Completed" + "' where id='" + id + " '";
 
                    
 
@@ -382,9 +382,20 @@ namespace BusinessLogic
             Updatecommand.ExecuteNonQuery();
             oasisconnectionString.Close();
         }
+
+        public void autoclose(int id)
+        {
+         var   query = "Update Tasks SET TaskStatus='" + "Auto Completed"  + "' where id='" + id + " '";
+            SqlConnection sqlConnection = new SqlConnection(ConnectionStr);
+            SqlCommand Updatecommand = new SqlCommand(query, sqlConnection);
+            sqlConnection.Open();
+            // int counter = 0;
+
+            Updatecommand.CommandType = CommandType.Text;
+
+            Updatecommand.ExecuteNonQuery();
+            sqlConnection.Close();
+        }
     }
-
-
-
 }
 

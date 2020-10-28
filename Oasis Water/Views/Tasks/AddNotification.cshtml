@@ -3,7 +3,7 @@
     ViewBag.Title = "AddNotification";
     Layout = "~/Views/Shared/" + Session["addtoLayout"].ToString();
 }
-
+<link href="~/css/Mymain.css" rel="stylesheet" />
 
 <section class="form5 cid-scLMTE7AQc" id="form5-1s">
 
@@ -28,9 +28,10 @@
 
 
                         <div class="col-12 form-group" data-for="textarea">
-                            <textarea name="Notification" placeholder="new data" data-form-field="textarea" class="form-control" id="textarea-form5-1s"></textarea>
+                            <textarea name="Notification" placeholder="new data" data-form-field="textarea" class="form-control" id="taskdetail"></textarea>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button type="submit" class="btn btn-primary display-4">Notify manager</button></div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn">
+                        <button type="submit" class="btn btn-primary display-4" style="margin-right:85px; text-align:center;">Notify manager</button></div>
                     </div>
                 </form>
             </div>

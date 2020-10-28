@@ -4,104 +4,66 @@
     Layout = "~/Views/Shared/" + Session["addtoLayout"].ToString();
 }
 
-@using DataAccessLayer.Models;
-@using BusinessLogic;
-
-@{
-    List<Users> userManager = new List<Users>();
-
-
-    UserAccounts AccountList = new UserAccounts("Select");
-
-    userManager = AccountList.Login();
-
-}
-
-@{
-
-    foreach (var user in userManager)
-    {
-
-        if (user.id == Convert.ToInt32(Session["userId"]))
-        {
-            if (user.UserRole == "FrontEndEmployee")
-
-            {
-                if (Session["tasktype"] != null)
-                {
-
-                    if (Session["tasktype"].ToString() == "DailyTask")
-                    {
-
-
-                        <form action="OasisTask" method="post">
-
-                            @{
-
-                                String[] FrontEndEmployee;
-                                FrontEndEmployee = new string[4];
-
-                                FrontEndEmployee[0] = "FLOORS,WALLS,COUNTER";
-                                FrontEndEmployee[1] = "TAPS SANITIZED,GRID CLEAN";
-                                FrontEndEmployee[2] = "FRIDGE CLEAN & ONTOP";
-                                FrontEndEmployee[3] = "ANY SIGN OF PESTS";
-
-                                <section class="header12 cid-scIw6wedZE mbr-parallax-background" id="header12-x">
-
-                                    <div class="mbr-overlay" style="opacity: 0.3; background-color: rgb(255, 255, 255);">
-                                    </div>
-                                    <div class="container">
-                                        <div class="row justify-content-center">
-                                            <div class="card col-12 col-md-12 col-lg-9">
-                                                <div class="card-wrapper">
-
-                                                    @{
-                                                        int counter = 1;
-                                                        for (int i = 0; i < FrontEndEmployee.Count(); i++)
-
-                                                        {
-
-                                                            <h1 class="card-title mbr-fonts-style mb-3 display-7">
-                                                                <strong>      </strong>
-                                                            </h1>
-
-                                                            <div class="card-box align-center">
-
-                                                                <input type="radio" name="NewTask" value="@FrontEndEmployee[i]" /> @FrontEndEmployee[i]
-
-                                                            </div>
-
-                                                            counter += 1;
-                                                        }
-
-                                                    }
-
-
-                                                    <div style="text-align:center" class="mbr-section-btn mt-3">
-                                                        <button type="submit" class="btn btn-secondary-outline display-4" h>Start Now</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
 
 
 
 
 
 
-                            }
-
-                        </form>
-
-
-                    }
 
 
 
-                }
-                else
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                @*else
                 {
                     <section class="header12 cid-scIw6wedZE mbr-parallax-background" id="header12-x">
 
@@ -479,5 +441,5 @@
             }
         }
     }
-}
+}*@
 

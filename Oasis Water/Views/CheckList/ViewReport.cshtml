@@ -1,0 +1,348 @@
+﻿
+@{
+    ViewBag.Title = "Oasis Graphical reports";
+    Layout = "~/Views/Shared/" + Session["addtoLayout"].ToString();
+}
+
+@using Oasis_Water.Controllers;
+
+<script src="~/js/exporting.js"></script>
+<script src="~/js/highcharts.js"></script>
+<link href="~/css/Mymain.css" rel="stylesheet" />
+<script src="~/js/OasisJS.js"></script>
+<script src="~/js/highcharts-more.js"></script>
+<link href="~/css/CalendarPicker.style.css" rel="stylesheet" />
+<script src="~/js/CalendarPicker.js"></script>
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+
+
+<div class="ContentContainer">
+
+    <h2>Oasis graphical reports</h2>
+
+    @{
+    }
+    <input type="button" class="btnReports2" onclick="location.href='/CheckList/ManagementCheckList'" value="Add new data" />
+
+    <input type="button" class="btnReports1" onclick="location.href='/CheckList/ViewReport'" value="Reset" />
+
+    <input type="button" class="btnReports5" onclick="location.href='/CheckList/GetCheckList'" value="View data in a spreadsheet format" />
+
+
+</div>
+<div class="parent">
+
+    <div class="column">
+
+        <div class="parent">
+
+            <div class="column">
+
+                <h5>TOP 5 PERFORMING EMPLOYEES</h5>
+                <div class="Mytop5">
+
+
+
+
+                </div>
+                @{
+
+                    List<EverageModel> data = (List<EverageModel>)(Session["perfomance"]);
+
+                    decimal[] arr = new decimal[100];
+                    string[] arrstr = new string[100];
+
+
+                    int count = 0;
+                    decimal level = data[0].CompletedTaskEv;
+
+                    for (int v = 0; v < 2; v++)
+                    {
+
+
+
+                        for (int i = 0; i < data.Count(); i++)
+                        {
+                            if (level < data[i].CompletedTaskEv)
+                            {
+
+                                count += 1;
+                                <ul class="Mylist">
+                                    <li>
+                                        @count .   @data[i].EmployeeName : @Convert.ToInt32(data[i].CompletedTaskEv)
+                                    </li>
+
+
+                                </ul>
+                            }
+                            else
+                            {
+                                level = data[i].CompletedTaskEv;
+
+                            }
+                        }
+
+
+
+                        // reverse array
+                    }
+
+
+
+                }
+                <div>
+                    <h5 style="text-align:center">oasisTask <strong>Options </strong></h5>
+                </div>
+
+                <hr />
+                <input type="button" style="background-color:green" class="btnReports13" id="Displaysurvey" value="Add task" />
+
+
+                <input type="button" style="background-color:blue" class="btnReports13" id="refresh" value="View completed tasks" onclick="AddTask()" />
+            </div>
+
+
+
+
+            <div class="column" id="check">
+
+                <input type="button" class="btnReports6" value="Ozone graph" onclick="FunctionalStatus(2)" onmouseover="FunctionalStatus(2)" />
+
+                <input type="button" class="btnReports5" value="Peformance graph" onclick=" Peek(1)" onmouseover="Peek(1)" />
+
+                <br />
+                <input type="button" class="btnReports7" value="Tank level graphs" onclick="Level(3)" onmouseover="Level(3)" />
+
+
+                <input type="button" class="btnReports8" value="Employee perfomance graph" onclick="OzoneAndMunTankLevelEv(0)" onmouseover="OzoneAndMunTankLevelEv(0)" />
+
+                <br />
+                <input type="button" class="btnReports9" value="Day vilotale of levels" onclick="VolatileOftotalLevel(4)" onmouseover="VolatileOftotalLevel(4)" />
+
+                <input type="button" class="btnReports10" value="Microne rates graph" onclick="PFlevel(5)" onmouseover="PFlevel(5)" />
+                <br />
+
+                <input type="button" class="btnReports11" value="Membrane rate graph" onclick="PressureLevel(6)" onmouseover="PressureLevel(6)" />
+
+                <input type="button" class="btnReports12" value="Products graph" onclick="PupWater(7)" onmouseover="PupWater(7)" />
+                <br />
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+    <div class="column">
+
+
+        <figure class="highcharts-figure">
+            <div id="container" class="graphReports">
+
+
+
+            </div>
+        </figure>
+
+    </div>
+
+    <div class="column">
+
+
+        <div class="container">
+            <div class="card">
+                <h3 class="card-header" id="monthAndYear"></h3>
+                <table class="table table-bordered table-responsive-sm" id="calendar">
+                    <thead>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="calendar-body">
+                    </tbody>
+                </table>
+
+                <div class="form-inline">
+
+                    <button class="CalenderBtn1" id="previous" onclick="previous()">Previous</button>
+
+                    <button class="CalenderBtn2" id="next" onclick="next()">Next</button>
+                </div>
+                <br />
+                <form class="form-inline">
+                    <p class="lead mr-2 ml-2" for="month">Jump To: </p>
+                    <select class="form-control col-sm-4" name="month" id="month" onchange="jump()">
+                        <option value=0>Jan</option>
+                        <option value=1>Feb</option>
+                        <option value=2>Mar</option>
+                        <option value=3>Apr</option>
+                        <option value=4>May</option>
+                        <option value=5>Jun</option>
+                        <option value=6>Jul</option>
+                        <option value=7>Aug</option>
+                        <option value=8>Sep</option>
+                        <option value=9>Oct</option>
+                        <option value=10>Nov</option>
+                        <option value=11>Dec</option>
+                    </select>
+
+
+                    <p for="year"></p><select class="form-control col-sm-4" name="year" id="year" onchange="jump()">
+                        <option value=1990>1990</option>
+                        <option value=1991>1991</option>
+                        <option value=1992>1992</option>
+                        <option value=1993>1993</option>
+                        <option value=1994>1994</option>
+                        <option value=1995>1995</option>
+                        <option value=1996>1996</option>
+                        <option value=1997>1997</option>
+                        <option value=1998>1998</option>
+                        <option value=1999>1999</option>
+                        <option value=2000>2000</option>
+                        <option value=2001>2001</option>
+                        <option value=2002>2002</option>
+                        <option value=2003>2003</option>
+                        <option value=2004>2004</option>
+                        <option value=2005>2005</option>
+                        <option value=2006>2006</option>
+                        <option value=2007>2007</option>
+                        <option value=2008>2008</option>
+                        <option value=2009>2009</option>
+                        <option value=2010>2010</option>
+                        <option value=2011>2011</option>
+                        <option value=2012>2012</option>
+                        <option value=2013>2013</option>
+                        <option value=2014>2014</option>
+                        <option value=2015>2015</option>
+                        <option value=2016>2016</option>
+                        <option value=2017>2017</option>
+                        <option value=2018>2018</option>
+                        <option value=2019>2019</option>
+                        <option value=2020>2020</option>
+                        <option value=2021>2021</option>
+                        <option value=2022>2022</option>
+                        <option value=2023>2023</option>
+                        <option value=2024>2024</option>
+                        <option value=2025>2025</option>
+                        <option value=2026>2026</option>
+                        <option value=2027>2027</option>
+                        <option value=2028>2028</option>
+                        <option value=2029>2029</option>
+                        <option value=2030>2030</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+        <script src="~/js/scripts.js"></script>
+        <!-- Optional JavaScript for bootstrap -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    </div>
+    >
+</div>
+
+<form id="task" action="Assigntask" method="post">
+
+
+    <div class="Mysurvey">
+        <div class="surveycontent" id="surveycontent">
+
+            <img src="~/assets/images/close-md.png" alt="close" class="close" />
+            <br />
+            <input type="button" value="Front end employee" onclick="showTaskFront()" class="btnSUb" />
+            <input type="button" value="Proccess area" onclick="ProccessAreaEmployee()" class="btnSUb" />
+            <input type="button" value="Storage Area" onclick=" StorageAreaEmployee()" class="btnSUb" />
+            <input type="button" class="btnSUb" value="Submit" id="Elertonsubmit" />
+
+            <input type="hidden" name="Employeerole" id="emplrole" />
+
+            <div class="parent">
+                <div class="column" id="radioList">
+
+
+                </div>
+                <div class="column" id="LabelList">
+
+
+                </div>
+
+            </div>
+            <br />
+        </div>
+
+    </div>
+</form>
+<script>
+    document.getElementById("Displaysurvey").addEventListener("click", function () {
+
+        document.querySelector(".Mysurvey").style.display = "flex";
+        document.querySelector(".parent").style.opacity = "0.3";
+
+    })
+
+    document.querySelector(".close").addEventListener("click", function () {
+
+        document.querySelector(".Mysurvey").style.display = "none";
+        document.querySelector(".parent").style.opacity = "1";
+
+    })
+
+
+
+</script>
+<script>
+
+    const Frontend = document.querySelector(".btnSUb");
+    const DivContainer = document.getElementById("surveycontent");
+
+    BtnAdd.addEventListener("click", showTaskFront);
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#Elertonsubmit").click(function () {
+            swal({
+                title: "Confimation",
+                text: "are you sure you want to assign the task?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-primary",
+                confirmButtonText: "yes",
+                cancelButtontext: "no",
+                closeOnConfirm: false,
+                closeOnCancel: false,
+
+
+            },
+
+                function (isConfirm) {
+                    if (isConfirm) {
+                        document.getElementById("task").submit();
+
+
+                    } else {
+                        swal("cancelled", "you did not assign a task to any employee", "error")
+                        document.getElementById("refresh");
+                    }
+                });
+
+            
+
+        });
+
+    });
+</script>
